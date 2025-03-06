@@ -1,0 +1,65 @@
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amigo Secreto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Juego de Amigo Secreto</h1>
+    <input type="text" id="nombre" placeholder="Ingresa un nombre">
+    <button onclick="agregarNombre()">Adicionar</button>
+    <ul id="listaNombres"></ul>
+    <button onclick="sortearAmigo()">Sortear Amigo</button>
+    <h2 id="resultado"></h2>
+    
+    <script>
+        let nombres = [];
+        
+        function agregarNombre() {
+            let input = document.getElementById("nombre");
+            let nombre = input.value.trim();
+            if (nombre === "") {
+                alert("Por favor, ingresa un nombre válido.");
+                return;
+            }
+            nombres.push(nombre);
+            actualizarLista();
+            input.value = "";
+        }
+        
+        function actualizarLista() {
+            let lista = document.getElementById("listaNombres");
+            lista.innerHTML = "";
+            nombres.forEach(nombre => {
+                let li = document.createElement("li");
+                li.textContent = nombre;
+                lista.appendChild(li);
+            });
+        }
+        
+        function sortearAmigo() {
+            if (nombres.length === 0) {
+                alert("Agrega al menos un nombre antes de sortear.");
+                return;
+            }
+            let indice = Math.floor(Math.random() * nombres.length);
+            document.getElementById("resultado").textContent = "El amigo secreto es: " + nombres[indice];
+        }
+    </script>
+</body>
+</html>
